@@ -6,6 +6,14 @@ data/
 *.xls
 *.csv
 
+# R stuff
+*.Rhistory
+*.Rproj*
+
+# Latex stuff
+*cache.yaml
+
+
 ### Python Template
 
 # Byte-compiled / optimized / DLL files
