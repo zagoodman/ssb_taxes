@@ -5,6 +5,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{caption}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
 
 \usepackage[english]{babel}
 \usepackage{float,color}
@@ -39,6 +41,23 @@ urldate=long,
 backend=biber,
 style=apa]{biblatex}
 \addbibresource{bibliography.bib}
+
+
+% adds space above row
+\newcommand{\customlinespace}{\addlinespace[.1cm]}
+
+% command for all table/figure notes
+\newcommand{\Fignote}[1]{
+	\begin{tablenotes}[para,flushleft]\footnotesize
+		\textit{Note}: #1
+	\end{tablenotes}
+}
+
+% stars
+\newcommand{\sym}[1]{\rlap{#1}}
+
+% note addendem for regression tables
+\newcommand{\Regnote}{Standard errors in parentheses are clustered at the zip code level. ***, **, and * indicate significance at the 1, 5, and 10 percent critical levels, respectively.}
 
 
 % Title page stuff
@@ -330,14 +349,25 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \captionof{table}{Summary statistics of household-month-level data for 2017 observations. All person-level variables (race, age, education) take the value of the female head of household unless there is no female head, in which case the variables take the value of the male head of household. Control includes all counties that never implemented an SSB tax, plus San Francisco and Seattle, which implemented taxes in 2018. $N$ is the number of household-months, so divide by 12 to get approximate number of households.}
 
 \clearpage
-% \input{../tables/didsugar.tex}
-\captionof{table}{Estimates from the baseline DiD specification (Equation \ref{baseline}) using the untaxed counties in the U.S. as the counterfactual. }\label{didsugartable}
+\input{../tables/sodatilesgcook.tex}
 
 \clearpage
-% \input{../tables/tableshortrun.tex}
-\captionof{table}{Estimates from the baseline DiD specification (Equation \ref{baseline}) using the untaxed counties in the U.S. as the counterfactual. }\label{tableshortrun}
+\input{../tables/sodatilesozcook.tex}
 
-%%% PLOTS
+\clearpage
+\input{../tables/sodatilesgsf.tex}
+
+\clearpage
+\input{../tables/sodatilesgphilly.tex}
+
+\clearpage
+\input{../tables/sodatilesgsf.tex}
+
+\clearpage
+\input{../tables/sodatilesgphilly.tex}
+
+
+%%% FIGURES
 
 % Cook Co: Panelist behaviors
 \clearpage
@@ -358,6 +388,17 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \label{cook_panelist_nutr}
 \includegraphics[width=1\textwidth, angle=0]{../figures/panelist_nutr.pdf}
 \footnotesize Each panel displays monthly sums or percentages for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist beverages
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: beverage purchases over time}
+\label{cook_panelist_nutr}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_bev.pdf}
+\footnotesize Each panel displays monthly sums of purchased beverages (in ounces) for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
 \end{center}
 \end{figure}
 
@@ -403,6 +444,14 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \renewcommand{\thetable}{A\arabic{table}}
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{A\arabic{figure}}
+
+%%% TABLES
+
+\clearpage
+\input{../tables/sodatilesgoak.tex}
+
+
+%%% FIGURES
 
 \begin{figure}[t]\centering
   \caption{Example price tag from Cook County grocery store} \label{pricetag}
