@@ -116,7 +116,7 @@ gen units=multi*size1_amount*qty
 
 save $dirout/temp/cookvoutside_sales.dta, replace
 
-*/
+
 
 use $dirout/temp/cookvoutside_sales.dta, clear
 
@@ -829,7 +829,7 @@ sort month
 
 save $dirin2/temp/across_CCG_cook.dta, replace
 
-
+*/
 
 /****************************************************************************
 4. Combine and Graph
@@ -866,11 +866,11 @@ lab var norm_CCG_noncook "CCG Rest of Chicago"
 
 
 
-tsline  norm_cum_laspeyres_cook norm_cum_laspeyres_noncook   if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))
+tsline  norm_cum_laspeyres_cook norm_cum_laspeyres_noncook   if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
 graph export $dirout/laspeyres_cook_v_noncook.png, replace
 
-tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))
-graph export $dirout/laspeyres_cook_v_noncook.png, replace
+tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
+graph export $dirout/cupi_cook_v_noncook.png, replace
 
 
 
@@ -1003,11 +1003,11 @@ lab var norm_cum_paasche_noncook "Paasche Rest of Chicago"
 lab var norm_cum_feenstra_cook "Feenstra Cook"
 lab var norm_cum_feenstra_noncook "Feenstra Rest of Chicago"
 
-tsline norm_cum_cupi* if month > ym(2016,1), xline(691, lcolor(red) ) xline(695,lcolor(red))
+tsline norm_cum_cupi* if month > ym(2016,1), xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
 
 graph export $dirout/cupi_cook_v_noncook_soda.png, replace
 
-tsline norm* if month > ym(2016,1),xline(691, lcolor(red) ) xline(695,lcolor(red))
+tsline norm* if month > ym(2016,1),xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
 
 graph export $dirout/price_cook_v_noncook_soda.png, replace
 
