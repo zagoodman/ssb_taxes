@@ -45,7 +45,8 @@ style=apa]{biblatex}
 \title{The Effect of the Cook County, Illinois Tax on Sugar-Sweetened Beverages on Sugar Consumption}
 \author{Zachary A. Goodman\thanks{zgoodman@ucsd.edu}\\ and Jacob Orchard\thanks{jdorchard@ucsd.edu. We gratefully recognize Prashant Bharadwaj, Jeffrey Clemens, Gordon Dahl, Itzik Fadlon, Mark Jacobsen, Katherine Meckel, Kaspar Wuthrich, and numerous seminar participants for their helpful comments and suggestions. Our analyses are calculated based in part on data from Nielsen Consumer LLC and marketing databases provided through the NielsenIQ Datasets at the Kilts Center for Marketing Data Center at The University of Chicago Booth School of Business. The conclusions drawn from the NielsenIQ data are those of our own and do not reflect the views of NielsenIQ. NielsenIQ is not responsible for, had no role in, and was not involved in analyzing and preparing the results reported herein.}}
 \affil{University of California, San Diego}
-\date{This version: April 2021}
+\date{This version: April 2021\\
+First Version: June 2019}
 
 \begin{document}
 \maketitle
@@ -56,11 +57,12 @@ Between 2015 and 2018, Sugar Sweetened Beverage (SSB) taxes were enacted in eigh
 
 \pagebreak
 
-\doublespacing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Introduction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\doublespacing
+
 \section{Introduction} \label{introduction}
 
 Obesity remains among the costliest health issues in the United States today. \textcite{finkelstein2009annual} find that obesity related health expenses cost the U.S. between \$101 billion to \$173 billion in 2008 in 2018 dollars. \textcite{cawley2012medical} estimate significantly larger aggregate expenses totaling \$246 billion using an IV approach.  As a potential solution to reducing the high medical costs of obesity, government agencies have relatively recently suggested reducing added sugar consumption \parencite{dietary2015dietary}. Sugar sweetened beverages (SSBs) are the source of nearly 40\% of the average American's consumption of added sugar \parencite{dietary2015dietary} and about 7\% of caloric intake \parencite{allcott2019should}, several policymakers have recommended imposing taxes on SSBs to drive down sugar consumption and health costs.
@@ -71,12 +73,20 @@ In this paper, our primary outcome of interest is the effect of SSB taxes enacte
 
 Although most of the SSB taxes passed in the U.S. were passed by voter referenda rather than by local government officials, the policies have been highly controversial. Proponents of these measures have argued that like taxes on tobacco products, taxes on SSBs could be effective in improving public health while raising revenues that could be used for health education. Opponents have argued that the tax is poorly targeted given that consumers can substitute towards other sugary goods instead of beverages or simply evade the tax by shopping outside the borders of the taxed locality. Additionally, opponents have contended that the taxes would be regressive since SSBs constitute a larger share of poorer consumers' budgets than they do for those with more resources. In this paper, we do not take a stance on welfare changes, but we do find TODO.
 
+[I believe that one of our main contributions relative to previous papers is that we can look at the entire basket of consumption goods rather than just SSBs. We should forcefully make this point in the introduction. We construct a novel dataset by combining detailed scanner data on the entire basket of a household purchases with upc level nutrition information. This allows us to see the entire nutrition profile of a household and how this responds to the Tax. 
+
+I also think that we should take a stance on welfare in the introduction, in the very least we should talk about the change in the price index of those affected. We can also look separately at the price indices of poor v. rich households. In so doing our study with address both the opponent and proponent arguments in a more complete way than the prior literature (at least based on what I remember). Related question: do poor households reduce sugar consumption? If poor household demand for sugar is inelastic, then the incidence of the tax would fall strongly on these households. 
+
+Another point that I believe we should make in the intro is that Cook county provides a unique testing ground to test whether costly interventions lead to permanent behavior changes. We find that it does not. Not the main point of our paper, but I think this probably relates to some vein of behavior literature. ]
+
 The remainder of the paper is organized as follows. Section \ref{background} provides a background of the policies enacted and related literature. Sections \ref{methods} and \ref{data} introduce the methods and data used, respectively. Section \ref{results} summarizes our results. Section \ref{discussion} discusses those results, and Section \ref{conclusion} concludes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Background
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background and Related Literature} \label{background}
+
+[Personal View: This section should be considerably shorter. Some of this information could be incorporated into the introduction, most notably the observation that other sugary products are a substitute for SSBs. The extensive health lit review could be put into the appendix. There was a section about internalities in the 2019 version that I think should be added in again.]
 
 In this section, we provide background on beverage taxes in the United States and summarize existing related literature.
 
@@ -103,11 +113,11 @@ The Cook County Board of Commissioners passed the Cook County Sweetened Beverage
 
 The Cook County beverage tax is unique among the other beverage taxes in the U.S. Besides having impacted the largest U.S. population to date, the law required that the tax be ``borne by the purchaser of the sweetened beverage," (Cook Co. Board of Commissioners, 2016). In practice, this meant that although the tax was collected by distributors, the law required that the tax be added to the price faced by consumers, usually in the form of a line-item on the receipt. This element of the policy has important implications for pass through and salience. Several large chain retailers added to the price tags of beverages a disclaimer that the tax would be added at the register (see Appendix \ref{pricetag} for an example.) However, it is possible that many retailers added the tax at checkout without including the tax in the displayed price, which may have reduced salience of the tax and possibly the impact on consumption \parencite{chetty2009salience}.
 
-Importantly, the Cook County beverage tax was not levied on products purchased using SNAP benefits since federal law prohibits taxation of these goods. All other localities in the US that have enacted SSB taxes levied them on distributors - NOT consumers directly - and did not require that the tax be added at the register. As we will discuss in the next subsection, authors have found evidence of less than 100\% pass through in these localities. Additionally, because these taxes are levied on distributors, the passed-through portion of the taxes could be paid for using SNAP benefits. Hence, the level at which the beverage tax is levied is a policy lever that can be used to possibly address regressivity concerns or subsidize a local-government budget with money from federal transfer programs. Another element to consider is that poorer folk most likely to receive SNAP benefits are also those most likely to face the nutrition informational barriers that drive internalities from SSB consumption (Allcott, Lockwood, \& Taubinsky, 2019b). If so, then exempting SNAP benefits from the tax may actually hurt consumers.
+Importantly, the Cook County beverage tax was not levied on products purchased using SNAP benefits since federal law prohibits taxation of these goods. All other localities in the US that have enacted SSB taxes levied them on distributors - NOT consumers directly - and did not require that the tax be added at the register. As we will discuss in the next subsection, authors have found evidence of less than 100\% pass through in these localities. Additionally, because these taxes are levied on distributors, the passed-through portion of the taxes could be paid for using SNAP benefits. Hence, the level at which the beverage tax is levied is a policy lever that can be used to possibly address regressivity concerns or subsidize a local-government budget with money from federal transfer programs. Another element to consider is that poor households most likely to receive SNAP benefits are also those most likely to face the nutrition informational barriers that drive internalities from SSB consumption (Allcott, Lockwood, \& Taubinsky, 2019b). If so, then exempting SNAP benefits from the tax may actually hurt consumers.
 
 To grasp the magnitude of the tax in Cook County, consider some popular beverages from our data. The most popular (in gross sales) carbonated beverage in our data for Cook County consumers is a 12-pack of 12-ounce cans that retails for \$3.57 on average. The Cook County beverage tax adds \$1.44, or 40\%, to the price of this 12-pack on average. The next most popular carbonated beverage is self-serve fountain beverages of assorted sizes, which retail for \$1.69 on average. For 20 - 32 ounce fountain drinks, the tax would add approximately 12\% - 19\% to the price. The most popular two-liter carbonated beverage retails for \$1.42 on average, and the tax adds 48\% to the price of this 67.6-ounce product. Considering taxed non-carbonated soft drinks, the most popular beverage is a 59-ounce lemonade product that retails for \$2.35 before the tax, or 25\% more with the tax. Across all carbonated beverages purchased in our dataset, we estimate the average percent tax to be about 23.5\%.\footnote{We only include carbonated beverages in this calculation since our data code both taxed and untaxed non-carbonated soft drinks together. Fruit-flavored juices ($<$100\% juice) tend to be cheaper per ounce than carbonated beverages, hence the percent tax is likely higher than the estimate reported here.}
 
-Is is worth noting that Chicago, circumscribed within Cook County, has levied a 3\% tax on non-fountain soft drinks (paid by consumer) as well as a 9\% tax on wholesale fountain drink syrups (paid by distributor) since 1994. These taxes are in addition to an Illinois state sales tax of 6.25\%, Cook County sales tax of 1.75\%, Chicago sales tax of 1.25\%, and a Regional Transit Authority (RTA) tax of 1\%. The Cook County beverage tax studied in this paper is in addition to these aforementioned taxes. Note that the other taxes do not change during the period studied (2017).
+It is worth noting that Chicago, circumscribed within Cook County, has levied a 3\% tax on non-fountain soft drinks (paid by consumer) as well as a 9\% tax on wholesale fountain drink syrups (paid by distributor) since 1994. These taxes are in addition to an Illinois state sales tax of 6.25\%, Cook County sales tax of 1.75\%, Chicago sales tax of 1.25\%, and a Regional Transit Authority (RTA) tax of 1\%. The Cook County beverage tax studied in this paper is in addition to these aforementioned taxes. Note that the other taxes do not change during the period studied (2017).
 
 Another difference between the Cook County tax and beverage taxes in other localities is the taxation of both regular and diet beverages. Besides Philadelphia, Pennsylvania, Cook County is the only other locality in the US to have included diet beverages in its beverage tax. Since diet beverages are close substitutes for regular beverages but contain no sugar, taxing them may be counterproductive if the goal is reduced sugar consumption. On the other hand, if maximizing revenue is the primary goal, then taxing diet beverages is likely a dominant policy strategy.
 
@@ -199,23 +209,51 @@ Another consideration, following the literature referenced earlier that humans h
 Finally, it is theoretically ambiguous whether consumers are more likely to consume more sugar from nonbeverages while the tax is in effect. On one hand, if sweetened beverages and nonbeverages are net substitutes, then some of the reduction in sugar from reduced consumption of SSBs should be offset by increased consumption of sweetened nonbeverages. On the other hand, imposing a tax as large as the one studied here may send a credible signal to consumers that sugar is unhealthy, which may cause consumers to update their preferences. If so, then consumers may substitute away from all sugary products including sugary nonbeverages. In this case, total sugar consumption would decrease by more than the amount that sugar from SSBs decrease. To answer this empirical question, we examine the impact of the tax on both total sugar and SSB sugar and compare the two estimates.
 
 \subsection{Welfare}
+While the above methods help us understand whether the tax may reduce sugar consumption and improve health, they do not capture the implicit costs to households in terms of an increase in their price index. A first pass way to calculate this cost is to note that prior to the implementation of the tax in Cook-County, around 2\% of a household's budget (in our scanner data) is spent on sugar sweetened beverages. If we combine that fact with the average 23.5\% price increase from the tax (assuming 100\% pass-through) and average Nielsen purchases of \$551 a quarter we get that the tax costs each household \$13.61 a month on average. However, this approach (similar to computing a Laspeyres price index) ignores the household's ability to substitute to cheaper products, as well as taste-changes that may occur as a result of the tax.
 
-While the above methods help us understand whether the tax may reduce sugar consumption and improve health, they do not capture the costs that households pay in the form of reduced consumption. To estimate the welfare loss from reduced consumption, we follow the structural approach of Redding and Weinstein (2018) to create price indexes. Compared to using a standard price level that assumes Cobb-Douglas utility and demand equal to constant budget share, the Redding and Weinstein method has the advantage of allowing for shifts in demand, prices, quality, variety, and consumer heterogeneity. We calculate price levels for both before and after the tax in both Cook and counterfactual counties. Each price index is determined using the following equation:
+
+In order to examine the welfare costs of the tax, we develop a simple household model where households derive utility from grocery consumption and from their health. Some of the health effects of sugar are non-internalized, which induces the policy maker to impose a tax. The household's utility is given as:
+
 \begin{align}
-P = \left[ \sum_k \left( \frac{p_k}{\varphi_k}  \right)^{1-\sigma}  \right]^{\frac{1}{1-\sigma}} \label{priceindex}
+	U(C_t,H(S_t)) = \log(C_t) + \alpha H(S_t) 
 \end{align}
-where $P$ is the price index, $\sigma$ is the elasticity of substitution across product modules, $p_k$ is the quantity-weighted average price within a product module, and $\varphi_k$ is the relative demand of each product module. After determining the four price levels (Cook vs. counterfactual, pretax vs. posttax), we can calculate the average compensating variation (in dollars) with:
+where H$(\cdot)$ is a function of sugar on the health of the consumer that is not internalized. C is a nested CES aggregation of $N_m$ grocery goods within M different categories:
+
+\begin{align}
+	C_t = \left( \sum_m^M \left( \sum_k^N (\varphi_{k,t} c_{k,t})^{\frac{\sigma_m-1}{\sigma_m}}  \right)^{\frac{\sigma_m}{\sigma_m-1}} \right)^{\frac{\sigma}{\sigma-1}}.
+\end{align}
+
+The household derives utility from consumption of each product at time t $c_{k,t}$. This per product utility varies with time specific taste shocks for each product $\varphi_{k,t}$. This taste parameter is meant to represent all of the internalized utility that the household derives from the product (including its health benefits). So if the sugar tax increases the household's knowledge about the negative health effects of sugar than we might expect $\varphi$ to decrease for products with high amounts of sugar. Each product group has it's own specific elasticity of substitution $\sigma_m$ and there is another elasticity of substitution across product categories $\sigma$. 
+
+Following standard CES optimization, each product category m has price index at time t of:
+
+\begin{align}
+    P_{tm} = \left[ \sum_k \left( \frac{p_{k,t}}{\varphi_{k,t}}  \right)^{1-\sigma_m}  \right]^{\frac{1}{1-\sigma_m}}. \label{priceindex_simple}
+\end{align}
+
+What matters for the household's price index is the taste adjusted price of the good $\frac{p_k}{\varphi_k}$ rather than simply the price. This is important for our analysis as the tax increases the price of SSB, but can also affect the ``taste'' for sugar given that the tax may signal to consumers that sugar is a bad. It should be noted that both the taxes affect on increasing the price of SSB as well as decreasing the taste for sugar will both act to increase the consumer's price index. So the price index could increase even more than the simple case depending on the consumer's ability to substitute to other goods. 
+
+We use the reverse weighting method from Redding and Weinstein (2018) to calculate the $\sigma$'s using all of the data in our sample (both inside and outside Cook county). We also follow Redding and Weinstein (2018) and invert the price index in \eqref{priceindex_simple} so that we do not need to estimate the time specific good taste parameter $\varphi_{k,t}$. The change in the price index in a product category m between any two periods then becomes:
+
+\begin{align}
+    \log \frac{P_t}{P_{t-1}} = \frac{1  }{\sigma_m-1} \log \frac{\lambda_{t,t-1}}{\lambda{t-1,t}} + \frac{1}{N_{t,t-1}} \sum_k \log \left(  \frac{p_{kt}}{p_{k,t-1}}\right) + \frac{1}{\sigma_m -1}\frac{1}{N_{t,t-1}} \sum_k \log\left(\frac{s^*_{kt}}{s^*_{k,t-1}} \right) \label{price_indexRW} .
+\end{align}
+The first term $\frac{1  }{\sigma_m-1} \log \frac{\lambda_{t,t-1}}{\lambda{t-1,t}}$ is the variety adjustment term first seen in Feenstra (1994) that accounts for increases in welfare due to new products ($\lambda_{t,t-1}$ is the budget share spent on products common to both periods). The number of products common to both periods is denoted by $N_{t,t-1}$ and the budget share of a product as a percentage of the total spent on common products is denoted by $s^*$. We estimate this price index change for every product category (module described in data section) for households within and outside of Cook County. We then treat the category level $P_m$ as prices and estimate \eqref{price_indexRW} using category prices and shares to get aggregate price indexes for Cook county and outside of Cook county. 
+
+
+ After determining the four price levels (Cook vs. counterfactual, pretax vs. posttax), we  calculate the average compensating variation (in dollars) with:
 \begin{align}
 CV = \bar{C}\left(\frac{P_{1,\text{Cook}}}{P_{0,\text{Cook}}} - \frac{P_{1,\text{counterfactual}}}{P_{0,\text{counterfactual}}}\right) \label{cv}
 \end{align}
 where $\bar{C}$ is the average consumption (in dollars) among Cook residents in the pretax period. The intuition is as follows: suppose the price level to increases by 10\% in Cook County during the taxed period. Over the same time period, the price level increased in counterfactual counties by 6\%. Hence, in the absence of treatment, (we assume) the price level in Cook County would have increased by only 4\%, so the effective price increase caused by the tax is 4\%. To ``compensate'' the consumer for the increased prices (and return her to her baseline level of consumption), we must provide her with 4\% of the money she spent in the pretax period.
 
-Interestingly, we can use this compensating variation to determine the social cost required to reduce sugar on a per-gram basis. Our measure will help policymakers conduct cost-benefit analyses of SSB taxes. These analyses must take into account 1) grams of sugar reduced per unit tax, 2) health cost savings per gram of sugar reduction, 3) compensating variation (social cost), and 4) transfers net transfer costs. This paper provides estimates of 1) and 3). We leave it to other researchers to determine the health cost savings per gram of sugar consumed (2) and policymakers to determine 4).
-
+Interestingly, we can use this compensating variation to determine the social cost required to reduce sugar on a per-gram basis. Our measure will help policymakers conduct cost-benefit analyses of SSB taxes. These analyses must take into account 1) grams of sugar reduced per unit tax, 2) health cost savings per gram of sugar reduction, 3) compensating variation (social cost in terms of an increase in the price index), and 4) transfers net transfer costs. This paper provides estimates of 1) and 3). We leave it to other researchers to determine the health cost savings per gram of sugar consumed (2) and policymakers to determine 4).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data} \label{data}
+
+[Should we put this section earlier? I think this is a unique contribution]
 
 We identify the effects of SSB taxes by linking several data sources. First, we observe household-level food purchase and demographic data from the Nielsen Homescan Survey, a nationally representative panel of 40-60,000 households from 2004 to 2016. These data have been used to asses the effects of other taxes. \textcite{harding2012heterogeneous} use the homescan data to asses the impact of cigarette taxes, especially for panelists living close to state borders. \textcite{cotti2016effects} look at how tobacco taxes affect smoking cessation product purchases. \textcite{dharmasena2012intended} assess the effects of a hypothetical tax on sugar. \textcite{colchero2016beverage} and \textcite{colchero2017mexico} use Nielsen panel data in Mexico to evaluate the impact of a one-peso per liter tax on SSBs.
 
