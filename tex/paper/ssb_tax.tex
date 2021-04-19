@@ -56,6 +56,9 @@ style=apa]{biblatex}
 % stars
 \newcommand{\sym}[1]{\rlap{#1}}
 
+% note addendem for fixed effects
+\newcommand{\FEnote}{All specifications include household and month fixed effects. }
+
 % note addendem for regression tables
 \newcommand{\Regnote}{Standard errors in parentheses are clustered at the zip code level. ***, **, and * indicate significance at the 1, 5, and 10 percent critical levels, respectively.}
 
@@ -349,58 +352,31 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \captionof{table}{Summary statistics of household-month-level data for 2017 observations. All person-level variables (race, age, education) take the value of the female head of household unless there is no female head, in which case the variables take the value of the male head of household. Control includes all counties that never implemented an SSB tax, plus San Francisco and Seattle, which implemented taxes in 2018. $N$ is the number of household-months, so divide by 12 to get approximate number of households.}
 
 \clearpage
+\input{../tables/itt_cook_behaviors.tex}
+
+\clearpage
+\input{../tables/itt_cook_nutrients.tex}
+
+\clearpage
+\input{../tables/itt_cook_beverages.tex}
+
+\clearpage
+\input{../tables/itt_cook_beverages_intensive.tex}
+
+\clearpage
+\input{../tables/itt_cook_source.tex}
+
+\clearpage
+\input{../tables/itt_cook_cross_border.tex}
+
+\clearpage
+\input{../tables/itt_geography.tex}
+
+\clearpage
 \input{../tables/sodatilesgcook.tex}
-
-\clearpage
-\input{../tables/sodatilesozcook.tex}
-
-\clearpage
-\input{../tables/sodatilesgsf.tex}
-
-\clearpage
-\input{../tables/sodatilesgphilly.tex}
-
-\clearpage
-\input{../tables/sodatilesgsf.tex}
-
-\clearpage
-\input{../tables/sodatilesgphilly.tex}
 
 
 %%% FIGURES
-
-% Cook Co: Panelist behaviors
-\clearpage
-\begin{figure}[t]
-\begin{center}
-\caption{Cook County DMA: panelist behaviors over time}
-\label{cook_panelist_behav}
-\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_behav.pdf}
-\footnotesize Each panel displays monthly sums or percentages for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
-\end{center}
-\end{figure}
-
-% Cook Co: Panelist nutrition
-\clearpage
-\begin{figure}[t]
-\begin{center}
-\caption{Cook County DMA: nutrient composition over time}
-\label{cook_panelist_nutr}
-\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_nutr.pdf}
-\footnotesize Each panel displays monthly sums or percentages for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
-\end{center}
-\end{figure}
-
-% Cook Co: Panelist beverages
-\clearpage
-\begin{figure}[t]
-\begin{center}
-\caption{Cook County DMA: beverage purchases over time}
-\label{cook_panelist_nutr}
-\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_bev.pdf}
-\footnotesize Each panel displays monthly sums of purchased beverages (in ounces) for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
-\end{center}
-\end{figure}
 
 % Cook Co: nutrient coef plots
 \clearpage
@@ -417,7 +393,7 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \begin{figure}[t]\centering
   \caption{Cook County zip code layers} \label{cookzip}
 	\includegraphics[width = \textwidth]{../figures/cookzips.pdf}
-	\footnotesize Zip code layers used for examining heterogeneous treatment effects by distance from the nearest border. White regions in the map have no corresponding zip code information (lakes, forest, and other land without mailing addresses) and hence are excluded from the analysis. The darkest blue zip codes have houses both inside and outside Cook County's border. The lighter-yellow zips lie on the border entirely within Cook County. The remaining layers are constructed using linear distance to the nearest untaxed zip.
+	\footnotesize Zip code layers used for examining heterogeneous treatment effects by distance from the nearest border. White regions in the map have no corresponding zip code information (lakes, forest, and other land without mailing addresses) and hence are excluded from the analysis. The darkest blue zip codes contain households both inside and outside Cook County's border. The lighter-yellow zips lie on the border entirely within Cook County. The remaining layers are constructed using linear distance to the nearest untaxed zip.
 \end{figure}
 
 % \clearpage
@@ -448,10 +424,67 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 %%% TABLES
 
 \clearpage
-\input{../tables/sodatilesgoak.tex}
+\input{../tables/sodatilesozcook.tex}
 
+\clearpage
+\input{../tables/sodatilesgsf.tex}
 
 %%% FIGURES
+
+% Cook Co: Panelist behaviors
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: panelist behaviors over time}
+\label{cook_panelist_behav}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_behav.pdf}
+\footnotesize Each panel displays monthly sums or percentages of panelist behaviors for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist nutrition
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: nutrient composition over time}
+\label{cook_panelist_nutr}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_nutr.pdf}
+\footnotesize Each panel displays monthly sums or percentages of different nutrients for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist beverages
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: beverage purchases over time}
+\label{cook_panelist_bev}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_bev.pdf}
+\footnotesize Each panel displays monthly sums of purchased beverages (in ounces) for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist sugar by source
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: sugar by source over time}
+\label{cook_panelist_sugar_sources}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_sugar_sources.pdf}
+\footnotesize Each panel displays monthly sums of sugar (in grams) for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue) from different product groups. Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist sugar by store location
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: variation by store location}
+\label{cook_panelist_stores}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_cook_stores.pdf}
+\footnotesize Each panel displays monthly sums of trips, total purchases, and grams of sugar (from beverages or non-beverages) for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Left panels are sums within Cook County stores for Cook County residents and non-Cook County stores for control residents. Right panels show the reverse: sums within non-Cook County stores for Cook County residents and Cook County stores for control residents. Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
 
 \begin{figure}[t]\centering
   \caption{Example price tag from Cook County grocery store} \label{pricetag}
