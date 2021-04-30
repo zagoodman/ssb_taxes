@@ -206,7 +206,7 @@ save "$dirout/temp_outside.dta",replace
 /******************************************************************************
 2a. Share of soda purchases
 ******************************************************************************/
-
+*/
 use $dirout/temp_cook.dta, clear
 append using $dirout/temp_outside.dta
 save $dirout/temp_cook_v_outside.dta, replace
@@ -226,7 +226,7 @@ label var mod_share "Soda budget share"
 lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
 
 lab val cook cook
-xtline mod_share if month > ym(2016,1) , overlay graphregion(color(white)) bgcolor(white) xline(691, lcolor(red) ) xline(695,lcolor(red))
+xtline mod_share if month > ym(2016,1) , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))
 
 
 graph export $dirout/soda_budget_share.png, replace
@@ -248,7 +248,7 @@ label var mod_share "Diet-soda budget share"
 lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
 
 lab val cook cook
-xtline mod_share if month > ym(2016,1) , overlay graphregion(color(white)) bgcolor(white) xline(691, lcolor(red) ) xline(695,lcolor(red))
+xtline mod_share if month > ym(2016,1) , overlay scheme(plotplainblind)  xline(691, lcolor(red) ) xline(695,lcolor(red))
 
 
 graph export $dirout/diet_budget_share.png, replace
@@ -278,7 +278,7 @@ lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
 lab val cook cook
 local taxbegin ym(2017,8)
 local taxend ym(2017,12)
-xtline unitprice if month > ym(2016,1)  , overlay graphregion(color(white)) bgcolor(white) xline(691, lcolor(red) ) xline(695,lcolor(red))
+xtline unitprice if month > ym(2016,1)  , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))
 
 
 
@@ -855,6 +855,8 @@ foreach var of global price_list{
 gen _base_`var' = `var' if month == ym(2017,7)
 egen base_`var' = max(_base_`var')
 gen norm_`var' = 100*`var'/base_`var'
+
+
 }
 
 lab var norm_cum_laspeyres_cook "Laspeyres Cook"
@@ -866,11 +868,13 @@ lab var norm_CCG_noncook "CCG Rest of Chicago"
 
 
 
-tsline  norm_cum_laspeyres_cook norm_cum_laspeyres_noncook   if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
+tsline  norm_cum_laspeyres* norm_cum_paasche*  if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red)) scheme(plotplainblind)  
 graph export $dirout/laspeyres_cook_v_noncook.png, replace
 
-tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
+tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  bgcolor(white) scheme(plotplainblind) 
 graph export $dirout/cupi_cook_v_noncook.png, replace
+
+
 
 
 
@@ -1003,11 +1007,11 @@ lab var norm_cum_paasche_noncook "Paasche Rest of Chicago"
 lab var norm_cum_feenstra_cook "Feenstra Cook"
 lab var norm_cum_feenstra_noncook "Feenstra Rest of Chicago"
 
-tsline norm_cum_cupi* if month > ym(2016,1), xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
+tsline norm_cum_cupi* if month > ym(2016,1), scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))  
 
 graph export $dirout/cupi_cook_v_noncook_soda.png, replace
 
-tsline norm* if month > ym(2016,1),xline(691, lcolor(red) ) xline(695,lcolor(red))  graphregion(color(white)) bgcolor(white) 
+tsline norm_cum_laspeyres* norm_cum_paasche*  if month > ym(2016,1),  scheme(plotplainblind)  xline(691,  lcolor(red) ) xline(695,lcolor(red)) 
 
 graph export $dirout/price_cook_v_noncook_soda.png, replace
 

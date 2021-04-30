@@ -209,6 +209,7 @@ Another consideration, following the literature referenced earlier that humans h
 Finally, it is theoretically ambiguous whether consumers are more likely to consume more sugar from nonbeverages while the tax is in effect. On one hand, if sweetened beverages and nonbeverages are net substitutes, then some of the reduction in sugar from reduced consumption of SSBs should be offset by increased consumption of sweetened nonbeverages. On the other hand, imposing a tax as large as the one studied here may send a credible signal to consumers that sugar is unhealthy, which may cause consumers to update their preferences. If so, then consumers may substitute away from all sugary products including sugary nonbeverages. In this case, total sugar consumption would decrease by more than the amount that sugar from SSBs decrease. To answer this empirical question, we examine the impact of the tax on both total sugar and SSB sugar and compare the two estimates.
 
 \subsection{Welfare}
+
 While the above methods help us understand whether the tax may reduce sugar consumption and improve health, they do not capture the implicit costs to households in terms of an increase in their price index. A first pass way to calculate this cost is to note that prior to the implementation of the tax in Cook-County, around 2\% of a household's budget (in our scanner data) is spent on sugar sweetened beverages. If we combine that fact with the average 23.5\% price increase from the tax (assuming 100\% pass-through) and average Nielsen purchases of \$551 a quarter we get that the tax costs each household \$13.61 a month on average. However, this approach (similar to computing a Laspeyres price index) ignores the household's ability to substitute to cheaper products, as well as taste-changes that may occur as a result of the tax.
 
 
@@ -233,7 +234,7 @@ Following standard CES optimization, each product category m has price index at 
 
 What matters for the household's price index is the taste adjusted price of the good $\frac{p_k}{\varphi_k}$ rather than simply the price. This is important for our analysis as the tax increases the price of SSB, but can also affect the ``taste'' for sugar given that the tax may signal to consumers that sugar is a bad. It should be noted that both the taxes affect on increasing the price of SSB as well as decreasing the taste for sugar will both act to increase the consumer's price index. So the price index could increase even more than the simple case depending on the consumer's ability to substitute to other goods. 
 
-We use the reverse weighting method from Redding and Weinstein (2018) to calculate the $\sigma$'s using all of the data in our sample (both inside and outside Cook county). We also follow Redding and Weinstein (2018) and invert the price index in \eqref{priceindex_simple} so that we do not need to estimate the time specific good taste parameter $\varphi_{k,t}$. The change in the price index in a product category m between any two periods then becomes:
+We use the reverse weighting method from Redding and Weinstein (2020) to calculate the elasticity of substitution for each product module $\sigma_m$  and the elasticity of substitution across product modules $\sigma$ using all of the data in our sample (both inside and outside Cook county). We also follow Redding and Weinstein (2020) and invert the price index in \eqref{priceindex_simple} so that we do not need to estimate the time specific good taste parameter $\varphi_{k,t}$. The change in the price index in a product category m between any two periods then becomes:
 
 \begin{align}
     \log \frac{P_t}{P_{t-1}} = \frac{1  }{\sigma_m-1} \log \frac{\lambda_{t,t-1}}{\lambda{t-1,t}} + \frac{1}{N_{t,t-1}} \sum_k \log \left(  \frac{p_{kt}}{p_{k,t-1}}\right) + \frac{1}{\sigma_m -1}\frac{1}{N_{t,t-1}} \sum_k \log\left(\frac{s^*_{kt}}{s^*_{k,t-1}} \right) \label{price_indexRW} .
@@ -245,9 +246,9 @@ The first term $\frac{1  }{\sigma_m-1} \log \frac{\lambda_{t,t-1}}{\lambda{t-1,t
 \begin{align}
 CV = \bar{C}\left(\frac{P_{1,\text{Cook}}}{P_{0,\text{Cook}}} - \frac{P_{1,\text{counterfactual}}}{P_{0,\text{counterfactual}}}\right) \label{cv}
 \end{align}
-where $\bar{C}$ is the average consumption (in dollars) among Cook residents in the pretax period. The intuition is as follows: suppose the price level to increases by 10\% in Cook County during the taxed period. Over the same time period, the price level increased in counterfactual counties by 6\%. Hence, in the absence of treatment, (we assume) the price level in Cook County would have increased by only 4\%, so the effective price increase caused by the tax is 4\%. To ``compensate'' the consumer for the increased prices (and return her to her baseline level of consumption), we must provide her with 4\% of the money she spent in the pretax period.
+where $\bar{C}$ is the average consumption (in dollars) among Cook residents in the pretax period. The intuition is as follows: suppose the price level increases by 10\% in Cook County during the taxed period. Over the same time period, the price level increased in counterfactual counties by 6\%. Hence, in the absence of treatment, (we assume) the price level in Cook County would have increased by only 4\%, so the effective price increase caused by the tax is 4\%. To ``compensate'' the consumer for the increased prices (and return her to her baseline level of consumption), we must provide her with 4\% of the money she spent in the pretax period.
 
-Interestingly, we can use this compensating variation to determine the social cost required to reduce sugar on a per-gram basis. Our measure will help policymakers conduct cost-benefit analyses of SSB taxes. These analyses must take into account 1) grams of sugar reduced per unit tax, 2) health cost savings per gram of sugar reduction, 3) compensating variation (social cost in terms of an increase in the price index), and 4) transfers net transfer costs. This paper provides estimates of 1) and 3). We leave it to other researchers to determine the health cost savings per gram of sugar consumed (2) and policymakers to determine 4).
+We  use this compensating variation to estimate the dollar cost per-gram of reducing sugar consumption    Our measure will help policymakers conduct cost-benefit analyses of SSB taxes. These analyses must take into account 1) grams of sugar reduced per unit tax, 2) health cost savings per gram of sugar reduction, 3) compensating variation (social cost in terms of an increase in the price index), and 4) tax revenue. This paper provides estimates of 1) and 3). We leave it to other researchers to determine the health cost savings per gram of sugar consumed (2) and policymakers to determine 4).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -324,6 +325,16 @@ One method to estimating the effect of the tax is to use the announcement of the
 We assume that agents seeking to avoid paying the tax would wait until the last month to stockpile. Besides increasing longevity of the supply during the taxed period, doing so carries less storage costs and additional option value of waiting (in case the tax is delayed or repealed, for example). Hence, we treat June as the first month that the forthcoming policy affects behavior, and we treat September as the last month since in October, the law is repealed, which may again change purchasing behavior. When we again estimate equation \ref{baseline} using this two-month earlier shifted period, we find that the tax reduced total sugar by 3.4\% and sugar from soda by 1.7\%. Point estimates and standard errors are presented in Table \ref{tableshortrun} below. We consider this estimate a more accurate estimate of the short run impact of the tax on sugar \textit{consumption}.
 
 Next, we examine the importance of distance from untaxed stores with respect to the effectiveness of the tax at reducing sugar consumption. Theoretically, households near the border face lower costs to avoid the tax than do households in the center of the taxed county since the cost to travel to an untaxed store is lower. We estimate Equation \ref{het} after coding each household with an indicator variable for their zip-code border as depicted in Figure \ref{cookzip}. We present the coefficient estimates on the interaction term between the tax and the zip border dummy in Figures \ref{ziptotsugar} and \ref{zipsugarsoda} below, which estimate the effect of the tax on total sugar purchases and sugar from soda purchases, respectively. While the coefficient is indistinguishable from zero for households who live in a border or cross-border zip, the coefficients are negative and economically significant for three of the four protected zip code layers.
+
+\subsection{Consumer Price Indices and Welfare}
+
+As described in the welfare section, we estimate consumer price indices in the Chicago area for households that reside both within and outside Cook County. We find that Cook County had a relatively significant increase in the price indices of the soda product module and a minor increase in the overall retail price index during the period of the tax.
+
+Figure \ref{soda_price} shows the change in the aggregate household budget  share spent on soda before and after the tax. The budget shares in Cook county and the rest of Chicago track each other quite closer except in the months directly prior to the implementation of the tax, which is further evidence of stockpiling behavior. The similar trajectory of the share of soda products inside and outside cook county indicate that a simple Laspeyres index may not be a bad estimate for the actual change in the cost of living due to the SSB tax. The price of soda in Cook County  on the other hand increases by around 1 cent per ounce, which indicates complete pass through. 
+
+Figure \ref{priceindex} shows our estimated results for the price index inside and outside Cook county. The top row shows the price index estimated for only soda products. The left hand side is the simple-Laspeyres index, while the right hand side is the CES Unified Price index (CUPI) where the aggregate household is allowed to have time varying taste shocks and CES utility. Both methods yield a 60 percent increase in the price index on soda for households in Cook County.
+
+The bottom row of figure \ref{priceindex} shows the change in the overall retail price index in Cook county and outside, of which soda is only a small part. Once again the left hand side shows the results from the Laspeyres price index, while the right hand side shows the full CUPI retail price index. The Laspeyres price index in Cook county is higher than outside Cook county for every month of the tax, with the exception of September. The Retail CUPI index paints a clearer picture: the price index of households with cook county increased by about 4 percent in August (the first month of the tax) and a further 1.25 percent in October before falling in December to 2 percent over July prices. This is compared to outside cook county that only had a 2.5 percent increase in retail prices during this period. Given that households in Cook county on average spent 285 dollars on Nielsen Retail purchases each month in 2017, the cumulative cost per-household of the four month tax was \$11.25 using the difference in Laspeyeres price indices and \$24.21 using the difference in CUPI price indices. This is compared to an estimated XX drop in grams of sugar consumption during the same period.   
 
 % Finally, we examine heterogeneity in treatment effects by household demographics.
 
@@ -411,41 +422,23 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \end{figure}
 
 \clearpage
-\begin{figure}[t]\centering
-  \caption{Soda Budget Share} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/soda_budget_share.png}
-\end{figure}
 
-\clearpage
 \begin{figure}[t]\centering
-  \caption{Average Price of Soda per Ounce} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/soda_price.png}
-\end{figure}
-
-\clearpage
-\begin{figure}[t]\centering
-  \caption{Soda Price Index: CUPI} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/cupi_cook_v_noncook_soda.png}
-\end{figure}
-
-\clearpage
-\begin{figure}[t]\centering
-  \caption{Soda Price Index} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/price_cook_v_noncook_soda.png}
-\end{figure}
-
-\clearpage
-\begin{figure}[t]\centering
-  \caption{Retail Price Index: Laspeyres} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/laspeyres_cook_v_noncook.png}
+  \caption{Soda Budget Share and Price} \label{soda_price}
+ 
+  \includegraphics[width = \textwidth]{../figures/server_output/soda_price_and_share.png}
+  \caption*{Source: Nielsen Consumer Panel}
+ 	
 \end{figure}
 
 
 \clearpage
 \begin{figure}[t]\centering
-  \caption{Retail Price Index: CCG} \label{cookzip}
-	\includegraphics[width = \textwidth]{../figures/server_output/cupi_cook_v_noncook.png}
+  \caption{Price Indices} \label{priceindex}
+	\includegraphics[width = \textwidth]{../figures/server_output/price_index_all.png}
+	\caption*{Note: The top row shows the change in the soda only price index in Cook County and the rest of the Chicago Area. The bottom row shows the full retail price index. The right side assumes that households have nested CES preferences with time varying taste parameters, while the left hand-side is a simple Laspeyres weighted index. All price indices are set at 100 in July 2017. }
 \end{figure}
+
 
 
 % \clearpage
