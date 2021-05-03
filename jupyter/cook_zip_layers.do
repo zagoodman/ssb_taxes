@@ -8,7 +8,7 @@ is in within Cook County.
 
 The 'using' data should have the following vars:
 - panelist_zipcd
-- locality_str
+- locality
 
 Returns the following vars:
 - layer
@@ -19,7 +19,7 @@ Returns the following vars:
 gen layer = 0
 
 * inside Cook, innermost layer
-replace layer = 6 if locality_str == "cook"
+replace layer = 6 if locality == "Cook"
 
 * cross border
 replace layer = 1 if inlist(panelist_zipcd, 60010, 60103, 60120, 60439, 60527, ///
