@@ -192,6 +192,8 @@ We match the UPC codes from purchases in the Nielsen data with product-level nut
 To match nutrition data to the Nielsen product data, we follow a procedure similar to that of \textcite{dubois2014prices}. We first drop non-food products, alcohol, tobacco, weight-loss/diet aids, and reference card goods.\footnote{Reference card goods are products without a barcode that panelists can report they purchased by scanning barcodes listed in a barcode reference booklet. These reference barcodes are associated with pictures and standardized item descriptions (such as ``bakery item"). We drop these products since we cannot infer accurate nutrition information, and reference card goods are vastly underreported relative to products that have barcodes. Nielsen provides alternative panelist weights for analyses that include reference card goods.} % As a robustness check we examine whether RC purchases change as a function of the tax.
 We then merge on UPC code, which matches about 52.8\% of the purchased UPCs. Next, for products without a direct match, we match within product (string description of the product), brand, product module,\footnote{over 1,000 product categories defined by Nielsen}, size type (measured in counts versus milliliters versus grams), flavor, variety, type, formula, and style. This step adds 23.8\% to the matched data. Next, we relax the brand requirement, which permits matching of store-brand goods and adds 11.2\% of purchased products.\footnote{The Syndigo data do not include store-brand goods.} Next we relax the flavor, variety, type, formula, and style requirements, which allow for another 7.6\% of products to be matched. For 4.0\% of products, we impute within product module for those product modules that have sufficient matched observations. For the remaining product modules, or 0.5\% of purchased products mostly comprised of fresh produce, we manually look up and enter nutrition information.
 
+To reduce the influence of outliers, we topcode our aggregated nutrient measures at the 99th percentile for all values greater than the 99th percentile. %TODO citation of another paper that does this
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Methods
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -296,7 +298,7 @@ We  use this compensating variation to estimate the dollar cost per-gram of redu
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results} \label{results}
-In this section we present results using the methodology discussed in section 3 and data introduced in section 4.
+In this section we present results using the methodology discussed in Section \ref{methods} and data introduced in Section \ref{data}.
 
 % \subsection{Pass-through}
 %
@@ -306,21 +308,50 @@ In this section we present results using the methodology discussed in section 3 
 %
 % Finally, we only include carbonated beverages as the vast majority of these beverages are taxable whereas other beverage categories (such as fruit juices) contain both taxed and untaxed products. In both specifications, we fail to reject a 100\% passthrough. We plot the time series in Figure \ref{pricechange} below.
 
-\subsection{Effect on sugar}
+\subsection{Effect on nutrients}
 
-Next, we estimate the effect of the tax on sugar purchases (from all food sources) using Equation \ref{spec_did}. To instill some confidence that our comparison group is a credible counterfactual, we plot the time series of average monthly sugar purchases per household in Figure \ref{cook_panelist_nutr}. One can see that % talk about pretrends
+Here we estimate the effect of the Cook County beverage tax on nutrients purchased, from all scanned food products, using Equation \ref{spec_did}. To instill some confidence that our comparison group - Chicago DMA panelists who live outside Cook County - is a credible counterfactual, we plot the time series of average nutrients purchased per month by treatment group in Figure \ref{cook_panelist_nutr}. We similarly examine panelist behaviors, such as number of trips, total expenditures, and items scanned per month across treatment arms in Figures \ref{cook_panelist_behav}. In both sets of time series plots, one can observe that pretreatment trends are remarkably similar with shocks occuring in both groups in the same months.
 
-% To examine whether this reduction came from reduced SSB consumption, we similarly plot the time series of total sugar purchased only from carbonated beverages (Figure \ref{didsugarsoda}). Much like the plot of total sugar, the plot of soda sugar includes steep decline during the taxed period surrounded by sharp spikes in the months before and after the taxed period. Directionally, it seems plausible that consumers did not entirely compensate for their reduced soda purchases with sugar consumption from elsewhere.
+We present our estimates of Equation \ref{spec_did} for key Nutrition Facts nutrients in Table \ref{itt_cook_nutrients}. We find that during the four months of the tax, Cook County households purchased 14.4 to 16.3 percent fewer grams of sugar than did control households during the same time period. We find significant decreases in carbohydrates purchased, but no significant decrease in non-sugar carbohydrates purchased. We find no change in fat or calories from sources other than sugar, and we find marginally significant decreases in calories, fiber, protein, and sodium, but these decreases become insignificant after adding sampling weights and balancing the panel. Interestingly, in the four months following removal of the tax, treatment households did \textit{not} increase purchases of any nutrient relative to their pretax baseline. In particular, we can reject that households increased their sugar purchases in the four months following the tax to make up for the reduction in sugar purchased during the tax.
 
-% Our estimates for Equation \ref{spec_did} using both total sugar and sugar from soda as outcome variables can be seen in Table \ref{asdf}. We find that during the taxed period, consumers purchased TODO\% less sugar overall when compared to purchases by consumers living in untaxed counties. Interestingly, we find that TODO\% of the reduction in total sugar is explained by the reduction of sugar from regular carbonated beverages.
+\subsection{Effect on beverage purchases}
 
-Next we will discuss two methods that consumers may have employed to avoid the tax: stocking-up before the tax, and traveling across the border to purchase beverages at untaxed stores.
+The Cook County beverage tax targeted beverages that contain added caloric sweeteners, with some exceptions such as beverages whose first ingredient is milk, 100\% fruit juices, and baby formula. We investigate how much the tax reduced purchases of some categories of beverages by estimating Equation \ref{spec_did} using the inverse hyperbolic sine of volume purchased of each beverage category as the outcome variable. Table \ref{itt_cook_beverages} shows our findings. We find that regular soda volume decreased by 33.2 - 39.1\%, diet soda volume decreased 14.3 - 27.0\%, fruit drinks\footnote{100\% fruit juice was not eligible for the tax, so some products in this category were not taxed.} by 30.5 - 35.5\%, and liquid tea by 18.4 - 24.8\%.%TODO: what percent tea products have sugar?
+Among these product categories that contain taxed products, we find no compensating increase among in the four months following the tax. However, the point estimates for regular soda are positive and one-sixth to one-third the magnitude of the decrease during the tax, suggesting that consumers may have partially offset the temporary reductions in regular soda purchased. Notably, we can reject that households maintained reduced levels of SSBs after the tax was removed.
 
-It's plausible that rational, forward-looking agents anticipating the tax may have purchased large quantities of soon-to-be-taxed beverages before the tax went into effect, thereby avoiding the tax for at least a short while. These consumers could then smooth their consumption of taxed beverages throughout the beginning of the taxed period without paying any additional taxes. Since our data comprise \textit{purchases} and not \textit{consumption}, we cannot observe whether households consume pretax-levels of taxed beverages during the tax. However, we can observe the heaping of soda purchases in the months leading up to the tax and in the month after the tax is removed. Ignoring this stockpiling behavior would lead to overstatements of the effect of the tax on sugar consumption.
+Moving to product categories that contain mostly untaxed beverages, we find that bottled water demand increased 8.5\% to 14.8\%, but we cannot reject a 0\% increase. We find weak evidence of increased demand for solid coffee but no change for liquid coffee.\footnote{Liquid coffee products with added sweeteners were taxed, except those whose first ingredient is milk.} We find no change in demand for milk and no significant increase in alcohol purchases, but we cannot reject large increases.
 
-One method to estimating the effect of the tax is to use the announcement of the tax as the first ``treated" period instead of when the tax actually went into effect. However, the tax was passed in November of 2016, about nine months before the tax went into effect, which is longer than the shelf life of most of the taxed beverages. However, the Cook County tax is unique in that the effective date of the tax was delayed one month after a lawsuit was filed against the ordinance. Consumers found out that the tax would be delayed only \textit{four days} before it was slated to go into effect. Consumers attempting to maximize shelf-life subject to not paying the tax may have waited until the weeks before the tax is in effect to stockpile soda, which may have began in late June - over a month before the actual implementation date, but only a few days before the scheduled implementation date. This story is consistent with what we observe in the data: an increase in regular soda purchases in June that persists through July and drops off during the taxed period in August onwards.
+In Table \ref{itt_cook_beverages_intensive}, we estimate effects of the tax on the intensive margin of purchasing select beverage categories. That is, we estimate Equation \ref{spec_did} setting the outcome variable to 1 if the household purchased any product in that category that month, 0 otherwise. We find that the tax decreased the probability of purchasing regular soda by 5.1 to 6.6 percentage points, diet soda by 2.0 to 3.8 percentage points, fruit drinks by 4.8 to 5.5 percentage points, and liquid tea by 3.4 to 4.1 percentage points. We find no significant change in the probability of purchasing beverages of other categories.
 
-Next, we examine the importance of distance from untaxed stores with respect to the effectiveness of the tax at reducing sugar consumption. Theoretically, households near the border face lower costs to avoid the tax than do households in the center of the taxed county since the cost to travel to an untaxed store is lower. We estimate Equation \ref{spec_het} after coding each household with an indicator variable for their zip-code layer as depicted in Figure \ref{cookzip}. We present the coefficient estimates on the interaction term between the tax and the zip layer dummy in Table \ref{itt_geography}. The coefficient is indistinguishable from zero for households who live in a border or cross-border zip, the coefficients are negative and economically significant for the two innermost zip code layers.
+\subsection{Effect on sugar from select sources}
+
+Here we characterize the change in sugar during the tax by the source of that sugar. We generate the results in Table \ref{itt_cook_source} by fitting Equation \ref{spec_did} with levels of sugar from a given source as the outcome variable. During the tax, treatment households reduced their sugar purchases by 81 to 93 grams per month. We find that sugar reductions from regular soda can explain 61\% to 81\% of this total reduction, and fruit drinks can explain 17\% to 25\%. To see if households substituted towards sugary non-beverage products, we estimated the effects of the tax on grams of sugar from the "Candy" and "Cookies" product groups. We find directionally positive but not statistically significant changes in sugar from sweets, which we interpret as suggestive evidence that households may have substituted soda for other sweet foods, albeit not one-for-one in terms of grams of sugar.
+
+After removal of the tax, we find that treatment households increased their purchases of sugar by 31 to 43 grams per month relative to their pretax baseline. Though this change is not statistically significant, it is between 33\% and 47\% of the taxed-period decrease. Interestingly, a large portion of this increase can be attributed to increases in sugar from fruit drinks. We do \textit{not} find large increases in sugar from regular soda following removal of the tax.
+
+\subsection{Effect on shopping and scanning behaviors}
+
+Next we examine whether panelists changed their shopping or scanning behaviors during the tax. We again estimate Equation \ref{spec_did} using the inverse hyperbolic sine of each panelist behavior as the outcome variable of interest, and we show the results in Table \ref{itt_cook_behaviors}. We find no evidence of changes in trips, total amount spent (as shown on the receipt), total amount spent on scanned items (as input by panelists), or number of scanned items with coupons or deals. We find marginally	significant reductions in food expenditures scanned, number of items scanned, and number of food items scanned; however, these reductions become insignificant after including sampling weights. We find a marginally significant reduction in number of storebrand items scanned, which remains significant after adding sampling weights and balancing the panel. In sum, we intepret these results as suggestive evidence that the tax did not reduce trips or amount spent at stores but may have shifted some spending from food to nonfood.
+
+\subsection{Treatment effect heterogeneity}
+
+In this section we look into heterogeneous treatment effects by household characteristics, geography, and pretreatment levels of soda purchases.
+
+We begin by estimating Equation \ref{spec_het} using as outcomes the inverse hyperbolic sine of grams of sugar and ounces of regular soda purchased. For the interaction terms, we use dummies for household income range, race, and education.\footnote{Race and education is that of the female head of household, or the male head of household if there is no female head.} Relative to the baseline category of households with income under \$35 thousand, higher income households reduced their sugar less during the tax on average, though no difference is statistically significant. Compared to White households, Black and Asian households changed their sugar about the same amount, but households that identify as Other had much larger decreases, albeit not statistically significant. The differences by education are the smallest, showing little difference in treatment effects by education level.
+
+Next, we examine the importance of distance from untaxed stores with respect to the effectiveness of the tax at reducing sugar consumption. Theoretically, households near the border face lower costs to avoid the tax than do households in the center of the taxed county since the cost to travel to an untaxed store is lower. We estimate Equation \ref{spec_het} after coding each household with an indicator variable for their zip-code layer as depicted in Figure \ref{cookzip}. We present the coefficient estimates on the interaction term between the tax and the zip layer dummy in Table \ref{itt_geography}. While the coefficients are indistinguishable from zero for households who live in a border zip code, the coefficients are negative and significant for the two inner zip code layers.
+
+To further examine whether cross-border shopping may explain the differences in treatment effects by geography, we estimate Equation \ref{spec_did} using the inverse hyperbolic sine of trips, expenditures, and grams of sugar separately for stores located on the same side of the Cook County border as one's residence (``inside border") and on the opposite side of the border (``cross border"). As can be seen in Table \ref{itt_cook_cross_border}, we find that trips to inside-border stores decreased 2.2\% to 4.5\%, offset by a nearly equal increase in trips to cross-border stores. Expenditures decreased somewhat in inside-border stores while expenditures did not change in cross-border stores. Interestingly, sugar purchases decreased by 21\% to 22\% in inside-border stores while they \textit{increased} 6.9\% to 10.3\% in cross-border stores. This observation highlights the importance of including products purchased at stores outside the taxed jurisdiction when estimating effects of county-level taxes. In our example, failing to account for cross-border purchases would overstate the effect of the tax on sugar purchased by more than 50\%.
+
+Finally, we examine effects of the beverage tax on sugar by pretreatment levels of soda purchases. We construct deciles by first calculating each households average monthly soda volume purchases during the year prior to the tax, excluding one month prior to the tax (to reduce bias from anticipatory effects). We divide this amount by monthly expenditures to so that the ranking does not simply capture the size of the household's budget. Summary statistics for each decile can be found in Table \ref{summary_deciles}. While deciles 1 and 2 purchase no soda before the tax, the top decile purchases about 730 ounces of regular soda per month and gets nearly 80\% of its sugar from regular soda.
+
+\textit{Ex ante}, one would expect to find smaller treatment effects for low soda purchasing households relative to high soda purchasing households. Hence, estimating effects by soda decile serves as a placebo check, though it should be noted that low soda purchasing households could still have negative treatment effects since soda was not the only taxed beverage category. We present our heterogeneous treatment effect estimates by pretreatment soda decile in Table \ref{sodatilesgcook}. We find no significant effects of the tax on sugar purchases for deciles 1 through 6, marginally significant negative effects for decile 7, and large, significant negative effects for deciles 8 through 10. The coefficients for the top deciles indicate that the tax reduced sugar purchases by 29\% to 44\%. Additionally, we do not find compensating increases for any decile following removal of the tax. We interpret these findings as evidence that the tax reduced sugar purchases for high soda purchasing households while the tax was in effect but had no lasting impacts.
+
+% Next we will discuss two methods that consumers may have employed to avoid the tax: stocking-up before the tax, and traveling across the border to purchase beverages at untaxed stores.
+
+% It's plausible that rational, forward-looking agents anticipating the tax may have purchased large quantities of soon-to-be-taxed beverages before the tax went into effect, thereby avoiding the tax for at least a short while. These consumers could then smooth their consumption of taxed beverages throughout the beginning of the taxed period without paying any additional taxes. Since our data comprise \textit{purchases} and not \textit{consumption}, we cannot observe whether households consume pretax-levels of taxed beverages during the tax. However, we can observe the heaping of soda purchases in the months leading up to the tax and in the month after the tax is removed. Ignoring this stockpiling behavior would lead to overstatements of the effect of the tax on sugar consumption.
+%
+% One method to estimating the effect of the tax is to use the announcement of the tax as the first ``treated" period instead of when the tax actually went into effect. However, the tax was passed in November of 2016, about nine months before the tax went into effect, which is longer than the shelf life of most of the taxed beverages. However, the Cook County tax is unique in that the effective date of the tax was delayed one month after a lawsuit was filed against the ordinance. Consumers found out that the tax would be delayed only \textit{four days} before it was slated to go into effect. Consumers attempting to maximize shelf-life subject to not paying the tax may have waited until the weeks before the tax is in effect to stockpile soda, which may have began in late June - over a month before the actual implementation date, but only a few days before the scheduled implementation date. This story is consistent with what we observe in the data: an increase in regular soda purchases in June that persists through July and drops off during the taxed period in August onwards.
 
 \subsection{Consumer Price Indices and Welfare}
 
@@ -343,7 +374,12 @@ The bottom row of figure \ref{priceindex} shows the change in the overall retail
 
 %We find that TODO.
 
-% Robustness Checks
+% Robustness Checks TODO
+
+% Alternative counterfactuals
+
+% CEM and synthetic controls
+
 % NY State budget 18% in 2009 and 1c/oz in 2010 not passed. In NYC in Sept 2012, >16 oz beverages banned starting March 2013, but overturned by courts in March 2013 before implementation. Could examine trends in purchases...
 
 \subsection{Limitations}
@@ -378,10 +414,7 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \footnotesize{All person-level variables (race, age, education) take the value of the female head of household unless there is no female head, in which case the variables take the value of the male head of household. Control includes households that reside in the Chicago DMA outside of Cook County limits. Summary statistics take into account sampling weights.}
 \end{table}
 
-% TODO: pretreatment trips, soda, sugar, etc.
-
-\clearpage
-\input{../tables/itt_cook_behaviors.tex}
+% TODO: summary table with pretreatment trips, soda, sugar, etc.
 
 \clearpage
 \input{../tables/itt_cook_nutrients.tex}
@@ -396,13 +429,16 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \input{../tables/itt_cook_source.tex}
 
 \clearpage
+\input{../tables/itt_cook_behaviors.tex}
+
+\clearpage
 \input{../tables/itt_het.tex}
 
 \clearpage
-\input{../tables/itt_cook_cross_border.tex}
+\input{../tables/itt_geography.tex}
 
 \clearpage
-\input{../tables/itt_geography.tex}
+\input{../tables/itt_cook_cross_border.tex}
 
 \clearpage
 \input{../tables/sodatilesgcook.tex}
@@ -460,8 +496,8 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 
 \input{../tables/summary_deciles.tex}
 
-\clearpage
-\input{../tables/sodatilesozcook.tex}
+% \clearpage
+% \input{../tables/sodatilesozcook.tex}
 
 \clearpage
 \input{../tables/sodatilesgsf.tex}
@@ -480,17 +516,6 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 
 %%% FIGURES
 
-% Cook Co: Panelist behaviors
-\clearpage
-\begin{figure}[t]
-\begin{center}
-\caption{Cook County DMA: panelist behaviors over time}
-\label{cook_panelist_behav}
-\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_behav.pdf}
-\footnotesize Each panel displays monthly sums or percentages of panelist behaviors for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
-\end{center}
-\end{figure}
-
 % Cook Co: Panelist nutrition
 \clearpage
 \begin{figure}[t]
@@ -499,6 +524,17 @@ In this paper, we use Nielsen household scanner data and UPC-level nutrition dat
 \label{cook_panelist_nutr}
 \includegraphics[width=1\textwidth, angle=0]{../figures/panelist_nutr.pdf}
 \footnotesize Each panel displays monthly sums or percentages of different nutrients for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
+\end{center}
+\end{figure}
+
+% Cook Co: Panelist behaviors
+\clearpage
+\begin{figure}[t]
+\begin{center}
+\caption{Cook County DMA: panelist behaviors over time}
+\label{cook_panelist_behav}
+\includegraphics[width=1\textwidth, angle=0]{../figures/panelist_behav.pdf}
+\footnotesize Each panel displays monthly sums or percentages of panelist behaviors for residents of Cook County, Illinois (red) and those in the same DMA outside of the county limits (blue). Vertical dashed lines represent the start and end of the tax in Cook County.
 \end{center}
 \end{figure}
 
