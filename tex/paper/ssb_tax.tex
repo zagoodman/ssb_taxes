@@ -207,9 +207,7 @@ When estimating Equations \ref{spec_did} and \ref{spec_het}, we cluster our stan
 
 \subsection{Welfare}
 
-While the above methods help us understand whether the tax may reduce sugar consumption and improve health, they do not capture the implicit costs to households in terms of an increase in their price index. A first-pass way to calculate this cost is to note that prior to the implementation of the tax in Cook County, around 2\% of a household's budget (in our scanner data) is spent on sugar sweetened beverages. If we combine that observation with the average 23.5\% price increase from the tax (assuming 100\% pass-through) and average Nielsen purchases of \$551 a quarter we get that the tax costs each household \$13.61 a month on average. However, this approach (similar to computing a Laspeyres price index) ignores the household's ability to substitute to cheaper products, as well as taste-changes that may occur as a result of the tax.
-
-In order to examine the welfare costs of the tax, we develop a simple household model where households derive utility from grocery consumption and from their health. Some of the health effects of sugar are non-internalized, which induces the policy maker to impose a tax. The household's utility is given as:
+While the above methods help us understand whether the tax may reduce sugar consumption and improve health, they do not capture the implicit costs to households in terms of an increase in their price index. In order to examine the welfare costs of the tax, we develop a simple household model where households derive utility from grocery consumption and from their health. Some of the health effects of sugar are non-internalized, which induces the policy maker to impose a tax. The household's utility is given as:
 
 \begin{align}
 	U(C_t,H(S_t)) = \log(C_t) + \alpha H(S_t)
@@ -245,6 +243,8 @@ CV = \bar{C}\left(\frac{P_{1,\text{Cook}}}{P_{0,\text{Cook}}} - \frac{P_{1,\text
 \end{align}
 
 where $\bar{C}$ is the average consumption (in dollars) among Cook residents in the pretax period. The intuition is as follows: suppose the price level increases by 10\% in Cook County during the taxed period. Over the same time period, the price level increased in counterfactual counties by 6\%. Hence, in the absence of treatment, (we assume) the price level in Cook County would have increased by only 6\%, so the effective price increase caused by the tax is 4\%. To ``compensate'' the consumer for the increased prices (and return her to her baseline level of consumption), we must provide her with 4\% of the money she spent in the pretax period.
+
+As a base month we use July 2017, the month prior to the implementation of the tax. We also compute a simple Laspeyres index in Cook County and the outside counterfactual as a simple robustness check.
 
 We use this compensating variation to estimate the dollar cost per-gram of reducing sugar consumption, which is useful for conducting cost-benefit analyses of beverage taxes. These analyses must take into account 1) grams of sugar reduced per unit tax, 2) health cost savings per gram of sugar reduction, 3) compensating variation (social cost in terms of an increase in the price index), and 4) tax revenue. This paper provides estimates of 1) and 3). We leave it to other researchers to determine 2) and 4).
 
