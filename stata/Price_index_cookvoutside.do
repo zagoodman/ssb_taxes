@@ -9,7 +9,7 @@ Jacob Orchard
 */
 
 
-clear
+clear all
 set more off
 
 local owndir = "/data/sgps/Jake/"
@@ -24,7 +24,7 @@ global dirout = "/data/sgps/Jake/sugar_tax"
 1. Prep data
 ********************************************************************************/
 
-/*
+
 
 
 use $dirin/purchases.dta, clear
@@ -122,6 +122,11 @@ use $dirout/temp/cookvoutside_sales.dta, clear
 
 keep if hh_cook == 1
 
+gen year = yofd(dofm(month))
+egen retail_expenditure = sum(pq), by(month household_code)
+sum retail_expenditure [w=pf] if year == 2017 //Average Retail Sales per month cook county
+
+local cost = r(mean)
 
 
 gen treattime = month < 695 & month > 690
@@ -173,6 +178,7 @@ gen upc=string(upc_org,"%17.0f") + string(upc_ver_uc)
 destring upc,replace
 
 
+
 collapse (sum) units pq  [w=pf], by(month upc modcode department_code ) fast 
 
 
@@ -202,11 +208,10 @@ gen cook = 0
 save "$dirout/temp_outside.dta",replace
 
 
-
 /******************************************************************************
 2a. Share of soda purchases
 ******************************************************************************/
-*/
+
 use $dirout/temp_cook.dta, clear
 append using $dirout/temp_outside.dta
 save $dirout/temp_cook_v_outside.dta, replace
@@ -214,19 +219,34 @@ save $dirout/temp_cook_v_outside.dta, replace
 *Soda Share
 use "$dirout/temp_cook_v_outside.dta", clear
 
+
+
 keep if modcode == 1484 | modcode == 1553 | modcode == 7743
 
-collapse (mean) mod_share, by(modcode month cook)
+collapse (mean) mod_exp mod_share, by(modcode month cook)
+
+
 
 keep if modcode == 1484
+sum mod_share if cook == 1
+local cook_share = r(mean)
+sum mod_share if cook == 0
+local noncook_share = r(mean)
+
 xtset cook month
+gen noncook = 1-cook
+
+lab def noncook  0 "Cook County-Average" 1 "Rest of Chicago Metropolitan Area"
+lab val noncook noncook
+
+xtset noncook month
 
 label var mod_share "Soda budget share"
 
 lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
 
 lab val cook cook
-xtline mod_share if month > ym(2016,1) , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))
+xtline mod_share if month > ym(2016,1) , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red)) saving(share,replace) name(share)
 
 
 graph export $dirout/soda_budget_share.png, replace
@@ -246,6 +266,12 @@ xtset cook month
 label var mod_share "Diet-soda budget share"
 
 lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
+gen noncook = 1-cook
+
+lab def noncook  0 "Cook County-Average" 1 "Rest of Chicago Metropolitan Area"
+lab val noncook noncook
+
+xtset noncook month
 
 lab val cook cook
 xtline mod_share if month > ym(2016,1) , overlay scheme(plotplainblind)  xline(691, lcolor(red) ) xline(695,lcolor(red))
@@ -274,11 +300,17 @@ label var unitprice "Soda Price"
 
 lab def cook 0 "Rest of Chicago Metropolitan Area" 1 "Cook County-Average"
 
+gen noncook = 1-cook
+
+lab def noncook  0 "Cook County-Average" 1 "Rest of Chicago Metropolitan Area"
+lab val noncook noncook
+
+xtset noncook month
 
 lab val cook cook
 local taxbegin ym(2017,8)
 local taxend ym(2017,12)
-xtline unitprice if month > ym(2016,1)  , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))
+xtline unitprice if month > ym(2016,1)  , overlay scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red)) saving(price,replace ) name(price)
 
 
 
@@ -288,7 +320,9 @@ graph export $dirout/soda_price.png, replace
 
 
 
+grc1leg share price, graphregion(color(white))
 
+graph export $dirout/soda_price_and_share.png, replace
 
 
 
@@ -298,7 +332,7 @@ graph export $dirout/soda_price.png, replace
 3a. Laspeyres and Paasche by upc
 *******************************************************************************/
 
-
+/*
 *Laspeyres and Paasche for Non-cook
 
 foreach x of numlist 540/707{
@@ -845,16 +879,28 @@ sort month
 tsset month
 format month %tm
 
-*Normalize to 100 in August, 2017
+*Normalize to 100 in June, 2017
 
 global price_list "cum_laspeyres_cook cum_laspeyres_noncook cum_paasche_cook cum_paasche_noncook  CCG_cook CCG_noncook"
 
 
 foreach var of global price_list{
 
-gen _base_`var' = `var' if month == ym(2017,7)
-egen base_`var' = max(_base_`var')
-gen norm_`var' = 100*`var'/base_`var'
+gen _base_`var'1 = `var' if month == ym(2017,3)
+gen _base_`var'2 = `var' if month == ym(2017,6)
+gen _base_`var'3 = `var' if month == ym(2017,5)
+gen _base_`var'4 = `var' if month == ym(2017,4)
+gen _base_`var'0 = `var' if month == ym(2017,7)
+
+egen base_`var'1 = max(_base_`var'1)
+egen base_`var'2 = max(_base_`var'2)
+egen base_`var'3 = max(_base_`var'3)
+egen base_`var'4 = max(_base_`var'4)
+egen base_`var'0 = max(_base_`var'0)
+
+gen base_`var' = .25*(base_`var'1 + base_`var'2 + base_`var'3  + base_`var'4 )
+
+gen norm_`var' = 100*`var'/base_`var'0
 
 
 }
@@ -868,15 +914,24 @@ lab var norm_CCG_noncook "CCG Rest of Chicago"
 
 
 
-tsline  norm_cum_laspeyres* norm_cum_paasche*  if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red)) scheme(plotplainblind)  
+tsline  norm_cum_laspeyres*   if month > ym(2016,7) & month < ym(2018,7), name(laspeyres_all) ytitle(Retail: Laspeyres Index) xline(691, lcolor(red) ) xline(695,lcolor(red)) scheme(plotplainblind)  
 graph export $dirout/laspeyres_cook_v_noncook.png, replace
 
-tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  xline(691, lcolor(red) ) xline(695,lcolor(red))  bgcolor(white) scheme(plotplainblind) 
+tsline norm_CCG_cook norm_CCG_noncook if month > ym(2016,7) & month < ym(2018,7),  name(cupi_all) ytitle(Retail: CUPI Index) xline(691, lcolor(red) ) xline(695,lcolor(red))  bgcolor(white) scheme(plotplainblind) 
 graph export $dirout/cupi_cook_v_noncook.png, replace
 
 
+*Cumulative increase in prices
+preserve
+gen diff_lasp = norm_cum_laspeyres_cook-norm_cum_laspeyres_noncook
+gen diff_cupi = norm_CCG_cook - norm_CCG_noncook
+keep if month > ym(2017,7) & month < ym(2017,12)
+gen cum_diff_lasp = sum(diff_lasp)
+gen cum_diff_cupi = sum(diff_cupi)
 
+sum cum_diff_lasp cum_diff_cupi
 
+restore
 
 
 
@@ -1000,20 +1055,38 @@ gen norm_cum_`var' =  100*cum_`var'/base_`var'
 
 lab var norm_cum_cupi_cook "CUPI Price Index Cook"
 lab var norm_cum_cupi_noncook "CUPI Price Index Rest of Chicago"
-lab var norm_cum_laspeyres_cook "Laspeyres Cook"
-lab var norm_cum_laspeyres_noncook "Laspeyres Rest of Chicago"
+lab var norm_cum_laspeyres_cook "Cook County"
+lab var norm_cum_laspeyres_noncook "Rest of Chicago Area"
 lab var norm_cum_paasche_cook "Paasche Cook"
 lab var norm_cum_paasche_noncook "Paasche Rest of Chicago"
 lab var norm_cum_feenstra_cook "Feenstra Cook"
 lab var norm_cum_feenstra_noncook "Feenstra Rest of Chicago"
 
-tsline norm_cum_cupi* if month > ym(2016,1), scheme(plotplainblind) xline(691, lcolor(red) ) xline(695,lcolor(red))  
+tsline norm_cum_cupi* if month > ym(2016,1), ytitle(Soda: CUPI Index) scheme(plotplainblind) name(cupi_soda) xline(691, lcolor(red) ) xline(695,lcolor(red))  
 
 graph export $dirout/cupi_cook_v_noncook_soda.png, replace
 
-tsline norm_cum_laspeyres* norm_cum_paasche*  if month > ym(2016,1),  scheme(plotplainblind)  xline(691,  lcolor(red) ) xline(695,lcolor(red)) 
+tsline norm_cum_laspeyres*   if month > ym(2016,1), ytitle(Soda: Laspeyres Index) name(laspeyres_soda) scheme(plotplainblind)  xline(691,  lcolor(red) ) xline(695,lcolor(red)) 
 
 graph export $dirout/price_cook_v_noncook_soda.png, replace
 
 
+grc1leg laspeyres_soda cupi_soda laspeyres_all cupi_all, graphregion(color(white))
+graph export $dirout/price_index_all.png, replace
 
+
+
+*Cumulative increase in soda prices
+preserve
+gen diff_lasp = (norm_cum_laspeyres_cook-norm_cum_laspeyres_noncook)/100
+gen diff_cupi = (norm_cum_cupi_cook - norm_cum_cupi_noncook)/100
+keep if month > ym(2017,7) & month < ym(2017,12)
+gen cum_diff_lasp = sum(diff_lasp)
+gen cum_diff_cupi = sum(diff_cupi)
+keep if month == ym(2017,11)
+gen soda_welfare = `cost'*`cook_share'*cum_diff_cupi
+gen soda_welfare_l = `cost'*`cook_share'*cum_diff_lasp
+
+sum soda_welfar*
+
+restore
